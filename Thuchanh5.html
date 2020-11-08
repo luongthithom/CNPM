@@ -1,0 +1,107 @@
+﻿<html>
+
+<head>
+<title>Tính tiền điện sinh hoạt bậc thang</title>
+
+<style>
+body {
+	font-family: times new roman;
+	background-size: cover;
+}
+
+h3 {
+	color: black;
+}
+
+h4 {
+	color: blue;
+	text-align: center;
+}
+
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+	font-size: 18px;
+}
+
+thead {
+	text-align: center;
+	background-color: #ffe57f;
+}
+
+
+td.col1 {
+	font-weight: bold;	
+	color: black;
+}
+
+</style>
+</head>
+
+<body>
+<form>
+ <table  cellspacing="0" cellpadding="5" align="center">
+	<thead>
+	 <tr>
+		<th colspan="2"><h3>TÍNH TIỀN ĐIỆN SINH HOẠT BẬC THANG</h3></th>
+	 </tr>
+	</thead>
+	<tbody>
+	 <tr>
+		<td class="col1">Chỉ số cũ:</td>
+		<td><center><input type="number" id="chi-so-cu" placeholder="Nhập chỉ số cũ"></center></td>
+	 </tr>
+	 <tr>
+		<td class="col1">Chỉ số mới:</td>
+		<td><center><input type="number" id="chi-so-moi" placeholder="Nhập chỉ số mới"></center></td>
+	 </tr>
+	 <tr>
+		<td class="col1">Điện năng tiêu thụ:</td>
+		<td><center><input type="number" id="tieu-thu" disabled="disabled"></center></td>
+	 </tr>
+	 <tr>
+		<td class="col1">Thành tiền:</td>
+		<td><center><input type="number" id="thanh-tien" disabled="disabled" ></center></td>
+	 </tr>
+	 <tr>
+		<td class="col1">Tổng tiền đã có VAT:</td>
+		<td><center><input type="number" id="VAT" disabled="disabled" ></center></td>
+	 </tr>
+	 <tr>
+		<td colspan="2"><center><input type="button" onClick="ThanhToan()" value="Tính tiền điện">&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="reset" value="Tiếp tục">&nbsp;&nbsp;&nbsp;&nbsp;
+					<button onclick="self.close()">Thoát</button></center>
+		</td>
+	 </tr>
+	</tbody>
+ </table>
+</form>
+
+<script type="text/javascript">
+	function ThanhToan() {
+		var chisocu = document.getElementById('chi-so-cu');
+		var chisomoi = document.getElementById('chi-so-moi');
+		var tieu = Number(chisomoi.value) - Number(chisocu.value);
+		var tong = tieu * 2030;
+		var VAT;	
+
+		if ( tieu < 101 )
+                	VAT = tong + tieu * 1418;
+            	else if ( tieu.value < 151 )
+                	VAT = tong + tieu * 1622;
+            	else if ( tieu.value < 201 )
+                	VAT = tong + tieu * 2044;
+            	else if ( tieu.value < 301 )
+                	VAT = tong + tieu * 2210;
+            	else if ( tieu.value < 401 )
+               		VAT = tong + tieu * 2361;
+            	else
+ 			VAT = tong + tieu * 2420;
+
+		document.getElementById('tieu-thu').value = tieu;
+		document.getElementById('thanh-tien').value = tong;
+		document.getElementById('VAT').value = VAT;
+	}
+</script>
+</body>
+</html>
